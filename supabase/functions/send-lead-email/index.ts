@@ -135,7 +135,7 @@ Deno.serve(async (req: Request) => {
         },
         body: JSON.stringify({
           from: "Candela <hello@wearecandela.com>",
-          to: ["mariarodriguez_89@hotmail.com"],
+          to: ["ma.rodriguezlorenzo89@gmail.com"],
           reply_to: email,
           subject: `Nueva solicitud de llamada — ${name}`,
           html: internalHtml,
