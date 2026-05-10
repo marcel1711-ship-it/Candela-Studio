@@ -4,10 +4,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        brand: {
-          orange: '#FF6B1A',
-          red: '#FF2D00',
-          amber: '#FFB347',
+        carbon: {
+          DEFAULT: '#1A1410',
+          light: '#241c16',
+          dark: '#100d09',
         },
       },
       animation: {
@@ -27,6 +27,7 @@ export default {
         },
       },
       fontFamily: {
+        heading: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
     },

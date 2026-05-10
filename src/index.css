@@ -1,6 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ─── LIGHT THEME ───────────────────────────────────────────────── */
+:root {
+  /* Backgrounds: warm cream hierarchy */
+  --bg-primary:    #FDF6EE;   /* warm cream — easy on the eyes */
+  --bg-secondary:  #F7EDE0;   /* slightly deeper warm sand */
+  --bg-card:       #FFFFFF;   /* pure white cards for contrast */
+  --bg-input:      #FDF6EE;   /* same as primary for seamless inputs */
+  --bg-footer:     #EEE0CE;   /* warm tan footer */
+
+  /* Text: strong dark-to-light hierarchy */
+  --text-primary:  #1C130B;   /* near-black, warm */
+  --text-body:     #2E1F12;   /* dark brown body text */
+  --text-muted:    #5C3D24;   /* mid brown — readable secondary */
+  --text-faint:    #876348;   /* warm faint */
+  --text-xfaint:   #A8825F;
+  --text-xxfaint:  #C4A07A;
+
+  /* Borders: warm terracota tones */
+  --border-subtle: rgba(160, 100, 55, 0.14);
+  --border-mid:    rgba(160, 100, 55, 0.25);
+  --border-accent: rgba(232, 80, 10, 0.38);
+
+  --accent:        #C94208;   /* slightly darker Candela for light bg */
+  --accent-hover:  #b33a07;
+  --amber:         #A3510A;   /* deep amber — readable on cream */
+  --terracota:     #8B4A1E;
+
+  /* Glows: very subtle on light */
+  --glow-orb-1:    rgba(232, 80, 10, 0.06);
+  --glow-orb-2:    rgba(184, 132, 90, 0.05);
+  --glow-center:   rgba(232, 80, 10, 0.025);
+  --grid-color:    rgba(160, 100, 55, 0.035);
+
+  --scrollbar-track: #F7EDE0;
+  --scrollbar-thumb: #C4A07A;
+}
 
 @layer base {
   html {
@@ -8,15 +47,27 @@
   }
 
   body {
-    background-color: #0a0a0a;
-    color: #e5e7eb;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   }
 
   * {
     box-sizing: border-box;
   }
+}
+
+/* Subtle card elevation */
+.theme-card {
+  box-shadow: 0 1px 4px rgba(100, 60, 20, 0.07), 0 4px 16px rgba(100, 60, 20, 0.06);
+}
+.theme-card:hover {
+  box-shadow: 0 4px 12px rgba(100, 60, 20, 0.10), 0 12px 32px rgba(100, 60, 20, 0.08);
 }
 
 @layer utilities {
@@ -36,21 +87,21 @@
 @keyframes flameFloat {
   0%, 100% {
     transform: translateY(0px) scale(1);
-    filter: drop-shadow(0 0 20px rgba(255, 107, 26, 0.4));
+    filter: drop-shadow(0 0 20px rgba(232, 80, 10, 0.45));
   }
   50% {
     transform: translateY(-12px) scale(1.03);
-    filter: drop-shadow(0 0 35px rgba(255, 107, 26, 0.6));
+    filter: drop-shadow(0 0 35px rgba(232, 80, 10, 0.65));
   }
 }
 
 @keyframes pulseSlow {
   0%, 100% {
-    opacity: 0.15;
+    opacity: 0.12;
     transform: scale(1);
   }
   50% {
-    opacity: 0.25;
+    opacity: 0.22;
     transform: scale(1.1);
   }
 }
@@ -60,18 +111,18 @@
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: var(--scrollbar-track);
 }
 ::-webkit-scrollbar-thumb {
-  background: #2a2a2a;
+  background: var(--scrollbar-thumb);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #FF6B1A;
+  background: var(--accent);
 }
 
 /* Select dropdown fix */
 select option {
-  background-color: #1c1c1c;
-  color: #e5e7eb;
+  background-color: var(--bg-card);
+  color: var(--text-body);
 }

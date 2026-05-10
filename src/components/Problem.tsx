@@ -11,21 +11,27 @@ const problems = [
 
 export function Problem() {
   return (
-    <section className="bg-[#0d0d0d] py-24 relative overflow-hidden">
+    <section className="py-24 relative overflow-hidden" style={{ backgroundColor: 'var(--bg-secondary)' }}>
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-full bg-gradient-to-b from-transparent via-orange-500/20 to-transparent" />
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-full"
+          style={{ background: 'linear-gradient(to bottom, transparent, var(--border-accent), transparent)' }}
+        />
       </div>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
-          <p className="text-orange-500 font-semibold text-sm tracking-widest uppercase mb-3">El problema</p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
+          <p className="font-semibold text-sm tracking-widest uppercase mb-3" style={{ color: 'var(--accent)' }}>El problema</p>
+          <h2
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight"
+            style={{ color: 'var(--text-primary)', fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}
+          >
             Vender online no debería{' '}
-            <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
+            <span style={{ background: 'linear-gradient(135deg, var(--amber), var(--accent))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
               ser un caos
             </span>
           </h2>
-          <p className="mt-4 text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="mt-4 text-lg max-w-2xl mx-auto" style={{ color: 'var(--text-muted)' }}>
             Si reconoces alguna de estas situaciones, Candela fue diseñado exactamente para ti.
           </p>
         </div>
@@ -34,12 +40,18 @@ export function Problem() {
           {problems.map((problem, i) => (
             <div
               key={i}
-              className="flex items-start gap-4 bg-[#141414] border border-red-900/20 rounded-2xl px-5 py-5 hover:border-red-700/40 transition-all duration-300 group"
+              className="theme-card flex items-start gap-4 rounded-2xl px-5 py-5 transition-all duration-300 group"
+              style={{
+                backgroundColor: 'var(--bg-card)',
+                border: '1px solid rgba(232,80,10,0.12)',
+              }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(232,80,10,0.32)'; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(232,80,10,0.12)'; }}
             >
               <div className="mt-0.5 flex-shrink-0">
-                <XCircle size={20} className="text-red-500/70 group-hover:text-red-500 transition-colors" />
+                <XCircle size={20} style={{ color: 'var(--accent)', opacity: 0.6 }} />
               </div>
-              <p className="text-gray-300 text-sm leading-relaxed">{problem}</p>
+              <p className="text-sm leading-relaxed" style={{ color: 'var(--text-body)' }}>{problem}</p>
             </div>
           ))}
         </div>
@@ -47,7 +59,10 @@ export function Problem() {
         <div className="mt-12 text-center">
           <a
             href="#contacto"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-400 hover:to-red-500 text-white font-semibold px-8 py-4 rounded-full transition-all duration-200 shadow-xl shadow-orange-500/25 hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 font-semibold px-8 py-4 rounded-full transition-all duration-200 hover:-translate-y-0.5"
+            style={{ backgroundColor: 'var(--accent)', color: '#FFFAF5', boxShadow: '0 8px 24px rgba(232,80,10,0.25)' }}
+            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--accent-hover)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--accent)'; }}
           >
             Quiero solucionar esto
           </a>
