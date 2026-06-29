@@ -16,15 +16,18 @@ const TikTokShopLogo = () => (
   </svg>
 );
 
-const MercadoLibreLogo = () => (
-  <svg viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="36">
-    <ellipse cx="40" cy="22" rx="28" ry="20" fill="#FFE600"/>
-    <path d="M18 22 Q40 42 62 22" stroke="#39B54A" strokeWidth="3.5" fill="none" strokeLinecap="round"/>
-    <circle cx="28" cy="18" r="3.5" fill="#EE1D1D"/>
-    <circle cx="52" cy="18" r="3.5" fill="#EE1D1D"/>
-    <path d="M28 28 Q40 38 52 28" stroke="#333" strokeWidth="2" fill="none" strokeLinecap="round"/>
+const WalmartLogo = () => (
+  <svg viewBox="0 0 80 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="48" height="36">
+    <text x="40" y="32" textAnchor="middle" fontSize="14" fontWeight="bold" fontFamily="Arial, sans-serif" fill="#0071CE">walmart</text>
+    <path d="M62 14 L62 8 L64 8 L64 14Z" fill="#FFC220"/>
+    <path d="M66 16 L72 14 L72.8 16 L66.8 18Z" fill="#FFC220"/>
+    <path d="M66 20 L72 22 L72.8 20 L66.8 18Z" fill="#FFC220"/>
+    <path d="M62 22 L62 28 L64 28 L64 22Z" fill="#FFC220"/>
+    <path d="M58 20 L52 22 L51.2 20 L57.2 18Z" fill="#FFC220"/>
+    <path d="M58 16 L52 14 L51.2 16 L57.2 18Z" fill="#FFC220"/>
   </svg>
 );
+
 
 const ShopifyLogo = () => (
   <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
@@ -49,23 +52,23 @@ const EbayLogo = () => (
   </svg>
 );
 
-const WalmartLogo = () => (
-  <svg viewBox="0 0 80 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="48" height="36">
-    <text x="40" y="32" textAnchor="middle" fontSize="14" fontWeight="bold" fontFamily="Arial, sans-serif" fill="#0071CE">walmart</text>
-    <path d="M62 14 L62 8 L64 8 L64 14Z" fill="#FFC220"/>
-    <path d="M66 16 L72 14 L72.8 16 L66.8 18Z" fill="#FFC220"/>
-    <path d="M66 20 L72 22 L72.8 20 L66.8 18Z" fill="#FFC220"/>
-    <path d="M62 22 L62 28 L64 28 L64 22Z" fill="#FFC220"/>
-    <path d="M58 20 L52 22 L51.2 20 L57.2 18Z" fill="#FFC220"/>
-    <path d="M58 16 L52 14 L51.2 16 L57.2 18Z" fill="#FFC220"/>
-  </svg>
-);
+
 
 const TargetLogo = () => (
   <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
     <circle cx="24" cy="24" r="20" fill="#CC0000"/>
     <circle cx="24" cy="24" r="13" fill="white"/>
     <circle cx="24" cy="24" r="6.5" fill="#CC0000"/>
+  </svg>
+);
+
+const MercadoLibreLogo = () => (
+  <svg viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="36">
+    <ellipse cx="40" cy="22" rx="28" ry="20" fill="#FFE600"/>
+    <path d="M18 22 Q40 42 62 22" stroke="#39B54A" strokeWidth="3.5" fill="none" strokeLinecap="round"/>
+    <circle cx="28" cy="18" r="3.5" fill="#EE1D1D"/>
+    <circle cx="52" cy="18" r="3.5" fill="#EE1D1D"/>
+    <path d="M28 28 Q40 38 52 28" stroke="#333" strokeWidth="2" fill="none" strokeLinecap="round"/>
   </svg>
 );
 
