@@ -423,7 +423,7 @@ export function BookingForm() {
             <Send size={11} className="inline mr-1" />
             Tambien puedes escribirnos directamente a{' '}
             <a href="mailto:hola@candelaconversion.com" style={{ color: 'var(--amber)' }}>
-              hola@candelaconversion.com
+              hello@wearecandela.com
             </a>
           </p>
         )}
