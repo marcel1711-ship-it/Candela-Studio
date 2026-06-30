@@ -75,23 +75,23 @@ const MercadoLibreLogo = () => (
 const logos: Record<string, FC> = {
   Amazon: AmazonLogo,
   'TikTok Shop': TikTokShopLogo,
-  'Mercado Libre': MercadoLibreLogo,
+  Walmart: WalmartLogo,
   Shopify: ShopifyLogo,
   Etsy: EtsyLogo,
   eBay: EbayLogo,
-  Walmart: WalmartLogo,
   Target: TargetLogo,
+  'Mercado Libre': MercadoLibreLogo,
 };
 
 const platforms = [
   { name: 'Amazon', bg: '#FF990012', border: '#FF990030' },
   { name: 'TikTok Shop', bg: '#EE1D5212', border: '#EE1D5230' },
-  { name: 'Mercado Libre', bg: '#FFE60015', border: '#FFE60040' },
+  { name: 'Walmart', bg: '#0071CE10', border: '#0071CE30' },
   { name: 'Shopify', bg: '#96BF4812', border: '#96BF4830' },
   { name: 'Etsy', bg: '#F5640010', border: '#F5640030' },
   { name: 'eBay', bg: '#E5323810', border: '#E5323830' },
-  { name: 'Walmart', bg: '#0071CE10', border: '#0071CE30' },
   { name: 'Target', bg: '#CC000010', border: '#CC000030' },
+  { name: 'Mercado Libre', bg: '#FFE60015', border: '#FFE60040' },
 ];
 
 export function Marketplaces() {
