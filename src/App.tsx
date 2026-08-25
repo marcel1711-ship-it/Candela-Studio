@@ -6,8 +6,9 @@ import { Marketplaces } from './components/Marketplaces';
 import { BeforeAfter } from './components/BeforeAfter';
 import { Process } from './components/Process';
 import { Trust } from './components/Trust';
-import { BookingForm } from './components/BookingForm';
+import { WhatsAppCTA } from './components/WhatsAppCTA';
 import { FAQ } from './components/FAQ';
+import { Funding } from './components/Funding';
 import { Footer } from './components/Footer';
 
 function App() {
@@ -22,8 +23,9 @@ function App() {
         <BeforeAfter />
         <Process />
         <Trust />
-        <BookingForm />
+        <WhatsAppCTA />
         <FAQ />
+        <Funding />
       </main>
       <Footer />
     </div>

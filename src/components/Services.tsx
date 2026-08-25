@@ -1,23 +1,14 @@
-import { ShoppingBag, Store, Zap, UtensilsCrossed, TrendingUp, ChevronRight, LayoutDashboard } from 'lucide-react';
+import { ShoppingBag, Zap, ChevronRight, LayoutDashboard } from 'lucide-react';
 
 const services = [
   {
     id: 'marketplaces',
     icon: ShoppingBag,
-    platforms: ['Amazon', 'TikTok Shop', 'Mercado Libre', 'Walmart'],
+    platforms: ['Amazon', 'TikTok Shop', 'Walmart', 'Faire'],
     title: 'Implementación en Marketplaces',
     subtitle: 'Empieza a vender donde está tu cliente',
     description: 'Te acompañamos desde cero hasta el primer pedido. Configuramos tu cuenta, estructuramos tus productos, cargamos el catálogo y lanzamos.',
     items: ['Configuración completa de cuenta', 'Estructura y optimización de productos', 'Carga de catálogo y variantes', 'Lanzamiento y primeras ventas'],
-  },
-  {
-    id: 'tienda',
-    icon: Store,
-    platforms: ['Shopify', 'WooCommerce', 'Otras plataformas'],
-    title: 'Creación de Tienda Online',
-    subtitle: 'Tu tienda, lista para vender en días',
-    description: 'Configuramos tu tienda online con pasarela de pagos, diseño optimizado para conversión y todo listo para empezar a vender.',
-    items: ['Configuración de plataforma', 'Pasarela de pagos integrada', 'Diseño orientado a conversión', 'Dominio y SSL configurados'],
   },
   {
     id: 'automatizaciones',
@@ -29,31 +20,13 @@ const services = [
     items: ['Captación y organización de leads', 'Seguimiento automático por email/WhatsApp', 'Notificaciones de pedidos', 'CRM completo y pipeline de ventas'],
   },
   {
-    id: 'locales',
-    icon: UtensilsCrossed,
-    platforms: ['Carnicerías', 'Restaurantes', 'Comercios', 'Servicios'],
-    title: 'Automatización para Negocios Locales',
-    subtitle: 'Ideal para carnicerías, restaurantes y más',
-    description: 'Transforma tu negocio local con formularios de pedido, notificaciones automáticas y organización sin caos desde el primer día.',
-    items: ['Formularios de pedido automatizados', 'Notificaciones al cliente y al negocio', 'Organización y seguimiento de pedidos', 'Base de datos de clientes integrada'],
-  },
-  {
     id: 'gestion-marketplaces',
     icon: LayoutDashboard,
-    platforms: ['Amazon', 'TikTok Shop', 'Mercado Libre', 'Walmart'],
+    platforms: ['Amazon', 'TikTok Shop', 'Walmart', 'Faire'],
     title: 'Gestión de Tiendas en Marketplaces',
     subtitle: 'Nosotros operamos, tú vendes',
     description: 'Nos encargamos del día a día de tu tienda en los marketplaces: actualización de listings, gestión de inventario, atención a reseñas y reportes de rendimiento.',
     items: ['Actualización y optimización de listings', 'Control de inventario y precios', 'Gestión de reseñas y atención al cliente', 'Reportes mensuales de rendimiento'],
-  },
-  {
-    id: 'ventas',
-    icon: TrendingUp,
-    platforms: ['WhatsApp', 'Email', 'CRM', 'Pipeline'],
-    title: 'Optimización del Proceso de Venta',
-    subtitle: 'Tu embudo de ventas, estructurado',
-    description: 'Organizamos tus leads, automatizamos el seguimiento y construimos un embudo de ventas que convierte de forma consistente.',
-    items: ['Organización y calificación de leads', 'Automatización en WhatsApp y email', 'Embudos de venta simples y efectivos', 'CRM y pipeline visual de ventas'],
   },
 ];
 

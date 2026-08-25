@@ -4,7 +4,7 @@ import { FlameLogo } from './FlameLogo';
 const marketplaceLogos = [
   { name: 'Amazon', color: '#FF9900' },
   { name: 'TikTok Shop', color: '#EE1D52' },
-  { name: 'Mercado Libre', color: '#FFE600' },
+  { name: 'Faire', color: '#1A1A1A' },
   { name: 'Shopify', color: '#96BF48' },
   { name: 'Walmart', color: '#0071CE' },
 ];
@@ -52,7 +52,7 @@ export function Hero() {
             </h1>
 
             <p className="text-lg leading-relaxed max-w-lg" style={{ color: 'var(--text-muted)' }}>
-              Ayudamos a negocios a vender en Amazon, TikTok Shop, Mercado Libre y más, mientras
+              Ayudamos a negocios a vender en Amazon, TikTok Shop, Walmart y más, mientras
               automatizamos sus procesos, pedidos y seguimiento de clientes.
             </p>
 
@@ -64,7 +64,7 @@ export function Hero() {
                 onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--accent-hover)'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--accent)'; }}
               >
-                Agendar llamada gratuita
+                Escríbenos por WhatsApp
                 <ArrowRight size={18} />
               </a>
               <a

@@ -1,7 +1,7 @@
-import { Phone, Search, FileText, Settings, GraduationCap, TrendingUp } from 'lucide-react';
+import { MessageCircle, Search, FileText, Settings, GraduationCap, TrendingUp } from 'lucide-react';
 
 const steps = [
-  { num: '01', icon: Phone, title: 'Llamada inicial', desc: 'Conversación sin compromiso. Te escuchamos, entendemos tu negocio y aclaramos todas tus dudas.' },
+  { num: '01', icon: MessageCircle, title: 'Primer contacto', desc: 'Nos escribes por WhatsApp, sin compromiso. Te escuchamos, entendemos tu negocio y aclaramos todas tus dudas.' },
   { num: '02', icon: Search, title: 'Diagnóstico', desc: 'Analizamos tu situación actual, tus objetivos y diseñamos el camino más eficiente para ti.' },
   { num: '03', icon: FileText, title: 'Plan de implementación', desc: 'Te presentamos un plan claro y detallado con tiempos, entregables y resultados esperados.' },
   { num: '04', icon: Settings, title: 'Configuración', desc: 'Implementamos todo de forma ordenada: cuentas, automatizaciones, catálogos, integraciones.' },
@@ -87,7 +87,7 @@ export function Process() {
             onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--accent-hover)'; }}
             onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--accent)'; }}
           >
-            Empezar con la llamada inicial
+            Escríbenos por WhatsApp
           </a>
         </div>
       </div>

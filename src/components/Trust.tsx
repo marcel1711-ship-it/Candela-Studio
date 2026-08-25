@@ -69,7 +69,7 @@ export function Trust() {
             >
               Listo para dar el siguiente paso?
             </h3>
-            <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Una llamada gratuita de 30 minutos puede cambiar tu negocio.</p>
+            <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Un mensaje por WhatsApp puede cambiar tu negocio.</p>
           </div>
           <a
             href="#contacto"
@@ -78,7 +78,7 @@ export function Trust() {
             onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--accent-hover)'; }}
             onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--accent)'; }}
           >
-            Agendar llamada gratuita
+            Escríbenos por WhatsApp
           </a>
         </div>
       </div>

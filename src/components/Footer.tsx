@@ -1,12 +1,11 @@
-import { Mail, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Mail, Instagram, Linkedin } from 'lucide-react';
 import { FlameLogo } from './FlameLogo';
 
 const links = {
   Servicios: [
     { label: 'Marketplaces', href: '#marketplaces' },
-    { label: 'Tienda Online', href: '#servicios' },
     { label: 'Automatizaciones', href: '#automatizaciones' },
-    { label: 'Negocios Locales', href: '#servicios' },
+    { label: 'Gestión de Tiendas', href: '#servicios' },
   ],
   Empresa: [
     { label: 'Inicio', href: '#inicio' },
@@ -40,27 +39,28 @@ export function Footer() {
               </div>
             </a>
             <p className="text-sm leading-relaxed max-w-xs mb-6" style={{ color: 'var(--text-faint)' }}>
-              Agencia especializada en implementación de tiendas online y automatización de procesos de venta. Ayudamos a negocios a vender más y trabajar menos.
+              Agencia especializada en implementación y gestión de tiendas en marketplaces, y en automatización de procesos de venta. Ayudamos a negocios a vender más y trabajar menos.
             </p>
             <a
-              href="mailto:hello@wearecandela.com"
+              href="mailto:wearecandelastudio@gmail.com"
               className="flex items-center gap-2 text-sm transition-colors"
               style={{ color: 'var(--text-muted)' }}
               onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--amber)'; }}
               onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-muted)'; }}
             >
               <Mail size={15} />
-              hello@wearecandela.com
+              wearecandelastudio@gmail.com
             </a>
             <div className="flex items-center gap-3 mt-5">
               {[
-                { icon: Instagram, href: '#', label: 'Instagram' },
+                { icon: Instagram, href: 'https://www.instagram.com/wearecandelastudio/', label: 'Instagram' },
                 { icon: Linkedin, href: '#', label: 'LinkedIn' },
-                { icon: Twitter, href: '#', label: 'Twitter' },
               ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
+                  target={href.startsWith('http') ? '_blank' : undefined}
+                  rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
                   aria-label={label}
                   className="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200"
                   style={{

@@ -44,31 +44,10 @@ const EtsyLogo = () => (
   </svg>
 );
 
-const EbayLogo = () => (
-  <svg viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="52" height="28">
-    <text x="2" y="32" fontSize="36" fontFamily="Arial, sans-serif" fontWeight="bold">
-      <tspan fill="#E53238">e</tspan><tspan fill="#0064D2">b</tspan><tspan fill="#F5AF02">a</tspan><tspan fill="#86B817">y</tspan>
-    </text>
-  </svg>
-);
 
-
-
-const TargetLogo = () => (
-  <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-    <circle cx="24" cy="24" r="20" fill="#CC0000"/>
-    <circle cx="24" cy="24" r="13" fill="white"/>
-    <circle cx="24" cy="24" r="6.5" fill="#CC0000"/>
-  </svg>
-);
-
-const MercadoLibreLogo = () => (
-  <svg viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="36">
-    <ellipse cx="40" cy="22" rx="28" ry="20" fill="#FFE600"/>
-    <path d="M18 22 Q40 42 62 22" stroke="#39B54A" strokeWidth="3.5" fill="none" strokeLinecap="round"/>
-    <circle cx="28" cy="18" r="3.5" fill="#EE1D1D"/>
-    <circle cx="52" cy="18" r="3.5" fill="#EE1D1D"/>
-    <path d="M28 28 Q40 38 52 28" stroke="#333" strokeWidth="2" fill="none" strokeLinecap="round"/>
+const FaireLogo = () => (
+  <svg viewBox="0 0 80 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="48" height="36">
+    <text x="40" y="31" textAnchor="middle" fontSize="19" fontWeight="bold" fontFamily="Georgia, 'Times New Roman', serif" fill="#1A1A1A">faire</text>
   </svg>
 );
 
@@ -78,9 +57,7 @@ const logos: Record<string, FC> = {
   Walmart: WalmartLogo,
   Shopify: ShopifyLogo,
   Etsy: EtsyLogo,
-  eBay: EbayLogo,
-  Target: TargetLogo,
-  'Mercado Libre': MercadoLibreLogo,
+  Faire: FaireLogo,
 };
 
 const platforms = [
@@ -89,9 +66,7 @@ const platforms = [
   { name: 'Walmart', bg: '#0071CE10', border: '#0071CE30' },
   { name: 'Shopify', bg: '#96BF4812', border: '#96BF4830' },
   { name: 'Etsy', bg: '#F5640010', border: '#F5640030' },
-  { name: 'eBay', bg: '#E5323810', border: '#E5323830' },
-  { name: 'Target', bg: '#CC000010', border: '#CC000030' },
-  { name: 'Mercado Libre', bg: '#FFE60015', border: '#FFE60040' },
+  { name: 'Faire', bg: '#1A1A1A0A', border: '#1A1A1A26' },
 ];
 
 export function Marketplaces() {

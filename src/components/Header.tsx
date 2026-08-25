@@ -75,7 +75,7 @@ export function Header() {
               onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--accent-hover)'; }}
               onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--accent)'; }}
             >
-              Agendar llamada
+              Escríbenos
             </a>
             <button
               className="md:hidden p-1 transition-colors"
@@ -111,7 +111,7 @@ export function Header() {
               className="mt-2 text-center font-semibold py-3 rounded-full"
               style={{ backgroundColor: 'var(--accent)', color: '#FFFAF5' }}
             >
-              Agendar llamada
+              Escríbenos
             </a>
           </div>
         </div>
