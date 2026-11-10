@@ -1,7 +1,7 @@
 import type { Config } from 'tailwindcss';
 
 /**
- * Sistema de diseño Candela Commerce.
+ * Sistema de diseño Candela Hub.
  *
  * Los colores se declaran como variables CSS para que cada tenant pueda
  * sobrescribir su paleta en runtime (stores.theme) sin recompilar nada.

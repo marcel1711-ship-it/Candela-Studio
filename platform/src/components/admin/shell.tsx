@@ -57,7 +57,7 @@ export function AdminShell({
   const sidebar = (
     <div className="flex h-full flex-col bg-ink text-cream/70">
       <div className="border-b border-cream/10 px-5 py-5">
-        <span className="wordmark text-sm text-cream">Candela</span>
+        <span className="wordmark text-sm text-cream">Candela Hub</span>
 
         {stores.length > 1 ? (
           <select
@@ -175,7 +175,7 @@ export function AdminShell({
           <button onClick={() => setOpen(true)} className="p-1" aria-label="Abrir menú">
             <Menu className="h-5 w-5" />
           </button>
-          <span className="wordmark text-sm">Candela</span>
+          <span className="wordmark text-sm">Candela Hub</span>
         </div>
 
         <main className="p-4 sm:p-6 lg:p-8">{children}</main>

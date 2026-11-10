@@ -51,11 +51,18 @@ export const getStoreForHost = cache(async (host: string): Promise<Store | null>
 
   if (!domainRow) {
     // 2. Subdominio de plataforma, o 3. fallback de desarrollo
+    // `*.vercel.app` es siempre un deploy de preview o el dominio por
+    // defecto del proyecto, nunca el dominio real de un cliente. Sin esta
+    // rama, el primer deploy muestra "tienda no disponible" y parece roto.
+    const isPreviewOrLocal =
+      clean === 'localhost' ||
+      clean.endsWith('.localhost') ||
+      clean.endsWith('.vercel.app') ||
+      /^\d+\.\d+\.\d+\.\d+$/.test(clean);
+
     slug =
       subdomainOf(clean) ??
-      (clean === 'localhost' || clean.endsWith('.localhost') || /^\d+\.\d+\.\d+\.\d+$/.test(clean)
-        ? process.env.DEV_STORE_SLUG ?? 'candela'
-        : null);
+      (isPreviewOrLocal ? process.env.DEV_STORE_SLUG ?? 'candela' : null);
 
     if (!slug) return null;
   }

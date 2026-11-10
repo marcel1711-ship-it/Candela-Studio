@@ -25,7 +25,7 @@ export function stripe(): Stripe {
   if (!key) throw new Error('Falta STRIPE_SECRET_KEY');
 
   cached = new Stripe(key, {
-    appInfo: { name: 'Candela Commerce', version: '0.1.0' },
+    appInfo: { name: 'Candela Hub', version: '0.1.0' },
     typescript: true,
   });
   return cached;

@@ -1,4 +1,4 @@
-# Candela Commerce
+# Candela Hub
 
 Plataforma de ecommerce **multi-tenant** para Candela Studio: un solo código y
 una sola base de datos sirven a todas las tiendas de los clientes, cada una con

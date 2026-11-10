@@ -212,3 +212,16 @@ create policy stock_alerts_member_all on public.stock_alerts
 -- La bitácora se lee, nunca se edita ni se borra desde la aplicación.
 create policy audit_log_member_read on public.audit_log
   for select to authenticated using (public.is_store_member(store_id));
+
+
+-- La bitácora se escribe desde el panel con la sesión del usuario. Sin esta
+-- política, logAudit() fallaba en silencio y la auditoría quedaba vacía.
+create policy audit_log_member_insert on public.audit_log
+  for insert to authenticated with check (public.is_store_member(store_id));
+
+-- store_counters solo lo toca next_order_number(), que es security definer.
+alter table public.store_counters enable row level security;
+
+create policy store_counters_member on public.store_counters
+  for all to authenticated
+  using (public.is_store_member(store_id)) with check (public.is_store_member(store_id));

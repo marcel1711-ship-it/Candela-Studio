@@ -13,7 +13,7 @@ export default function LoginPage() {
     <main className="grid min-h-screen place-items-center bg-cream px-4 py-12">
       <div className="w-full max-w-sm">
         <div className="mb-10 text-center">
-          <span className="wordmark text-2xl">Candela</span>
+          <span className="wordmark text-2xl">Candela Hub</span>
           <p className="mt-2 text-xs uppercase tracking-wideish text-ink-mute">
             Panel de administración
           </p>
