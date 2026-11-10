@@ -11,8 +11,18 @@ export function LoginForm() {
   const params = useSearchParams();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  // El middleware nos manda aquí con ?error= cuando no pudo verificar la
+  // sesión. Mejor decir qué pasó que dejar la pantalla muda.
+  const reason = params.get('error');
+  const [error, setError] = useState<string | null>(
+    reason === 'config'
+      ? 'La aplicación no tiene configuradas las credenciales de Supabase. Revisa las variables de entorno en Vercel.'
+      : reason === 'auth'
+        ? 'No pudimos verificar tu sesión. Vuelve a entrar.'
+        : null,
+  );
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();

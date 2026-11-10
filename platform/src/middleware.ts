@@ -3,21 +3,42 @@ import { createServerClient } from '@supabase/ssr';
 import type { ResponseCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 
 /**
- * Hace dos cosas en cada request:
- *   1. Refresca la sesión de Supabase (los Server Components no pueden
- *      escribir cookies, así que el refresco tiene que vivir aquí).
- *   2. Cierra /admin a cualquiera sin sesión, ANTES de que se renderice nada.
+ * Guardia del panel de administración.
  *
- * Esto es defensa en profundidad, no la única barrera: RLS sigue siendo
- * quien decide qué filas puede ver cada quien.
+ * Solo corre en /admin/*. La tienda pública NO pasa por aquí, y eso importa
+ * por dos razones:
+ *
+ *   1. Un comprador nunca inicia sesión, así que consultar el servidor de Auth
+ *      en cada visita era una llamada de red bloqueante a cambio de nada.
+ *   2. Cuando corría en todas las rutas, cualquier fallo aquí tumbaba la
+ *      tienda entera con un 500 (MIDDLEWARE_INVOCATION_FAILED), no solo el
+ *      panel. Un hipo de Auth no debe impedir vender.
+ *
+ * Esto es defensa en profundidad, no la única barrera: RLS sigue siendo quien
+ * decide qué filas ve cada quien.
  */
 export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  const isLogin = pathname === '/admin/login';
+
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  // Sin credenciales no hay forma de verificar nada. Antes esto reventaba con
+  // un 500 ilegible; ahora manda al login, que sí explica qué pasa.
+  if (!url || !anonKey) {
+    console.error('[middleware] Faltan NEXT_PUBLIC_SUPABASE_URL o NEXT_PUBLIC_SUPABASE_ANON_KEY');
+    if (isLogin) return NextResponse.next({ request });
+    const redirect = request.nextUrl.clone();
+    redirect.pathname = '/admin/login';
+    redirect.searchParams.set('error', 'config');
+    return NextResponse.redirect(redirect);
+  }
+
   let response = NextResponse.next({ request });
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
+  try {
+    const supabase = createServerClient(url, anonKey, {
       cookies: {
         getAll: () => request.cookies.getAll(),
         setAll: (cookiesToSet: Array<{ name: string; value: string; options?: Partial<ResponseCookie> }>) => {
@@ -28,38 +49,43 @@ export async function middleware(request: NextRequest) {
           );
         },
       },
-    },
-  );
+    });
 
-  // getUser() revalida contra el servidor de Auth. getSession() solo lee la
-  // cookie y es falsificable: en una ruta protegida no sirve.
-  const { data: { user } } = await supabase.auth.getUser();
+    // getUser() revalida contra el servidor de Auth. getSession() solo lee la
+    // cookie y es falsificable: en una ruta protegida no sirve.
+    const { data: { user } } = await supabase.auth.getUser();
 
-  const { pathname } = request.nextUrl;
-  const isAdmin = pathname.startsWith('/admin');
-  const isLogin = pathname === '/admin/login';
+    if (!user && !isLogin) {
+      const redirect = request.nextUrl.clone();
+      redirect.pathname = '/admin/login';
+      redirect.searchParams.set('next', pathname);
+      return NextResponse.redirect(redirect);
+    }
 
-  if (isAdmin && !isLogin && !user) {
-    const url = request.nextUrl.clone();
-    url.pathname = '/admin/login';
-    url.searchParams.set('next', pathname);
-    return NextResponse.redirect(url);
+    if (user && isLogin) {
+      const redirect = request.nextUrl.clone();
+      redirect.pathname = '/admin';
+      redirect.search = '';
+      return NextResponse.redirect(redirect);
+    }
+
+    return response;
+  } catch (error) {
+    // Falla de red, Auth caído, llave mal pegada... Fallamos CERRADO: al
+    // login, nunca dejando pasar. Pero sin derribar la petición con un 500.
+    console.error('[middleware] No se pudo verificar la sesión:', error);
+
+    if (isLogin) return NextResponse.next({ request });
+
+    const redirect = request.nextUrl.clone();
+    redirect.pathname = '/admin/login';
+    redirect.searchParams.set('error', 'auth');
+    return NextResponse.redirect(redirect);
   }
-
-  if (isLogin && user) {
-    const url = request.nextUrl.clone();
-    url.pathname = '/admin';
-    url.search = '';
-    return NextResponse.redirect(url);
-  }
-
-  return response;
 }
 
 export const config = {
-  matcher: [
-    // Todo menos estáticos, imágenes y el webhook de Stripe (que se autentica
-    // con firma, no con cookies, y no debe pagar el costo de este middleware).
-    '/((?!_next/static|_next/image|favicon.ico|api/stripe/webhook|.*\\.(?:svg|png|jpg|jpeg|gif|webp|avif|ico)$).*)',
-  ],
+  // SOLO el panel. La tienda pública no necesita sesión y no debe pagar el
+  // costo —ni el riesgo— de este middleware.
+  matcher: ['/admin/:path*'],
 };
