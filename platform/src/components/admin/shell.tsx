@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import {
   BarChart3, Boxes, ExternalLink, LayoutDashboard, LogOut, Menu, Package,
-  Settings, ShoppingCart, Tag, X,
+  Settings, ShoppingCart, Tag, X, Building2,
 } from 'lucide-react';
 
 import { createClient } from '@/lib/supabase/client';
@@ -81,6 +81,25 @@ export function AdminShell({
       </div>
 
       <nav className="flex-1 space-y-0.5 p-3" aria-label="Panel">
+        {/* Solo el staff de Candela administra la plataforma. El enlace se
+            oculta aquí, pero quien manda es requirePlatformAdmin() en el
+            servidor: esconder un <Link> nunca es una medida de seguridad. */}
+        {isPlatformAdmin && (
+          <Link
+            href="/admin/plataforma"
+            onClick={() => setOpen(false)}
+            aria-current={pathname.startsWith('/admin/plataforma') ? 'page' : undefined}
+            className={`mb-2 flex items-center gap-3 border border-gold/30 px-3 py-2.5 text-sm transition-colors ${
+              pathname.startsWith('/admin/plataforma')
+                ? 'bg-gold/20 text-cream'
+                : 'text-gold-light hover:bg-gold/10'
+            }`}
+          >
+            <Building2 className="h-4 w-4 shrink-0" strokeWidth={1.5} aria-hidden />
+            Plataforma
+          </Link>
+        )}
+
         {NAV.map(({ href, label, Icon, exact }) => {
           const active = exact ? pathname === href : pathname.startsWith(href);
           return (

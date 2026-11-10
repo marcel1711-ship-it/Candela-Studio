@@ -114,3 +114,12 @@ export async function logAudit(
     console.error('[audit] No se pudo registrar:', err);
   }
 }
+
+/** Solo para el staff de Candela: crear tiendas, suspender, ver todos los tenants. */
+export async function requirePlatformAdmin(): Promise<AdminContext> {
+  const ctx = await requireAdmin();
+  if (!ctx.isPlatformAdmin) {
+    throw new Error('Esta sección es solo para el equipo de Candela.');
+  }
+  return ctx;
+}
