@@ -126,6 +126,40 @@ Cadena completa:
 
 ---
 
+## Multicanal por CSV
+
+El cliente vende en su web, en Amazon, en Walmart y en TikTok Shop. El dolor
+real no es publicar desde un solo lugar: es **vender el mismo producto en dos
+lados teniendo uno**. Esto se resuelve sin tocar ninguna API.
+
+**Entrada** — se sube el reporte de ventas del marketplace en *Canales →
+Importar*. El CSV se lee en el navegador, se detectan las columnas solas
+(también en español), el usuario corrige lo que haga falta y el mapeo queda
+guardado para la próxima. Antes de importar, el sistema dice **qué SKU no
+existen en el catálogo**, que es lo único que hace fallar una conciliación.
+
+**Salida** — *Descargar inventario* genera el CSV de existencias para cargarlo
+de vuelta en el marketplace. Si el canal tiene `stock_buffer`, se resta: es el
+colchón contra la sobreventa, porque ningún marketplace refleja el stock al
+instante.
+
+**Garantías:**
+
+- Reimportar el mismo reporte **no duplica nada**. El índice único
+  `(store_id, channel_id, external_order_id)` lo impide.
+- Toda importación queda en `import_batches` y se puede **revertir**: cancela
+  sus pedidos y devuelve el inventario. Revertir dos veces no infla el stock.
+- Las ventas importadas descuentan por el **mismo camino atómico** que una
+  venta de la web (`apply_order_inventory`), así que disparan las alertas de
+  stock bajo igual que cualquier otra.
+- Cada marketplace puede tener **su propio SKU** para el mismo producto
+  (`channel_listings`); si no hay mapeo, se usa el SKU del catálogo.
+
+El siguiente escalón —integración por API— reutiliza estas mismas tablas:
+`channel_listings.external_id` ya está ahí esperando el ASIN o el item id.
+
+---
+
 ## Agregar una tienda nueva
 
 1. `insert into stores (...)` con su `slug` y su `theme`.

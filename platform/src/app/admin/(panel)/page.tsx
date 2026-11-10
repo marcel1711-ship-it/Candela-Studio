@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { AlertTriangle, ArrowRight, PackageX } from 'lucide-react';
+import { AlertTriangle, ArrowRight, PackageX, Share2 } from 'lucide-react';
 
 import { StatTile } from '@/components/admin/stat-tile';
 import { SalesChart, type SalesPoint } from '@/components/admin/sales-chart';
@@ -12,9 +12,10 @@ export default async function DashboardPage() {
   const { store } = await requireAdmin();
   const supabase = await createClient();
 
-  const [metricsRes, seriesRes, alertsRes, ordersRes] = await Promise.all([
+  const [metricsRes, seriesRes, channelsRes, alertsRes, ordersRes] = await Promise.all([
     supabase.rpc('store_dashboard', { p_store_id: store.id, p_days: 30 }),
     supabase.rpc('store_sales_series', { p_store_id: store.id, p_days: 30 }),
+    supabase.rpc('store_sales_by_channel', { p_store_id: store.id, p_days: 30 }),
     supabase
       .from('stock_alerts')
       .select(`
@@ -44,6 +45,13 @@ export default async function DashboardPage() {
   };
   const alerts = (alertsRes.data ?? []) as unknown as AlertRow[];
   const orders = ordersRes.data ?? [];
+
+  type ChannelRow = {
+    channel_id: string; channel_name: string;
+    revenue_cents: number; orders: number; units: number;
+  };
+  const channels = (channelsRes.data ?? []) as ChannelRow[];
+  const channelTotal = channels.reduce((n, c) => n + Number(c.revenue_cents), 0);
 
   const revenue = m.revenue_cents ?? 0;
   const money = (c: number) => formatMoney(c, store.currency, store.locale);
@@ -95,6 +103,49 @@ export default async function DashboardPage() {
       </section>
 
       <SalesChart data={series} currency={store.currency} locale={store.locale} />
+
+      {/* Desglose por canal: solo aparece si de verdad vende en más de uno.
+          Con un solo canal sería una barra al 100%, que no dice nada. */}
+      {channels.length > 1 && channelTotal > 0 && (
+        <section className="border border-line/60 bg-white">
+          <div className="flex items-center justify-between border-b border-line/50 px-6 py-4">
+            <h2 className="flex items-center gap-2 font-display text-lg">
+              <Share2 className="h-4 w-4 text-ink-mute" strokeWidth={1.5} aria-hidden />
+              Ventas por canal
+            </h2>
+            <Link href="/admin/canales" className="text-xs text-ink-mute hover:text-ink">
+              Importar y conciliar <span aria-hidden>→</span>
+            </Link>
+          </div>
+
+          <ul className="divide-y divide-line/40">
+            {channels
+              .filter((c) => Number(c.revenue_cents) > 0)
+              .map((c) => {
+                const pct = (Number(c.revenue_cents) / channelTotal) * 100;
+                return (
+                  <li key={c.channel_id} className="px-6 py-3.5">
+                    <div className="flex items-baseline justify-between gap-4">
+                      <span className="text-sm">{c.channel_name}</span>
+                      <span className="text-sm tabular-nums">{money(Number(c.revenue_cents))}</span>
+                    </div>
+                    <div className="mt-2 flex items-center gap-3">
+                      <div className="h-1.5 flex-1 bg-cream-deep">
+                        <div
+                          className="h-full rounded-r-[2px]"
+                          style={{ width: `${pct}%`, backgroundColor: '#A87A1E' }}
+                        />
+                      </div>
+                      <span className="shrink-0 text-xs tabular-nums text-ink-mute">
+                        {c.units} u. · {pct.toFixed(0)}%
+                      </span>
+                    </div>
+                  </li>
+                );
+              })}
+          </ul>
+        </section>
+      )}
 
       <div className="grid gap-6 lg:grid-cols-2">
         {/* ── Stock bajo ──────────────────────────────────────────────────── */}

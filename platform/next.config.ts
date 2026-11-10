@@ -4,6 +4,11 @@ const nextConfig: NextConfig = {
   // El repo tiene dos apps con su propio lockfile; fijamos la raíz para que
   // Next no la infiera mal y arrastre archivos del landing.
   outputFileTracingRoot: __dirname,
+  experimental: {
+    // Las importaciones de CSV mandan hasta 20 mil filas ya mapeadas; el
+    // límite por defecto de 1 MB las cortaría a media carga.
+    serverActions: { bodySizeLimit: '8mb' },
+  },
   images: {
     // Imágenes de producto: Supabase Storage + fuentes externas que el cliente use.
     remotePatterns: [
