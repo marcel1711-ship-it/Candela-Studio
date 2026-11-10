@@ -1,20 +1,37 @@
 import type { Metadata, Viewport } from 'next';
-import { Playfair_Display, Inter } from 'next/font/google';
+import localFont from 'next/font/local';
 
 import './globals.css';
 
-const display = Playfair_Display({
-  subsets: ['latin'],
+/**
+ * Tipografías auto-hospedadas.
+ *
+ * NO se usa `next/font/google`: esa API descarga las fuentes desde Google
+ * DURANTE el build, así que una falla de red en ese momento tumba el deploy
+ * entero con un error que no dice nada ("Cannot read properties of null").
+ * Ya nos pasó en el primer despliegue a Vercel.
+ *
+ * Con los .woff2 en el repo el build no depende de nadie. De paso: una
+ * petición menos para el visitante, y ningún dato suyo viaja a Google.
+ *
+ * Son fuentes VARIABLES, así que un solo archivo cubre todo el rango de
+ * pesos. El subconjunto `latin` (U+0000–00FF) ya incluye ñ, acentos, ¿ y ¡.
+ */
+const display = localFont({
+  src: [
+    { path: '../fonts/playfair.woff2',        weight: '400 700', style: 'normal' },
+    { path: '../fonts/playfair-italic.woff2', weight: '400 700', style: 'italic' },
+  ],
   variable: '--font-display',
   display: 'swap',
-  weight: ['400', '500', '600', '700'],
-  style: ['normal', 'italic'],
+  fallback: ['Georgia', 'Times New Roman', 'serif'],
 });
 
-const sans = Inter({
-  subsets: ['latin'],
+const sans = localFont({
+  src: [{ path: '../fonts/inter.woff2', weight: '400 700', style: 'normal' }],
   variable: '--font-sans',
   display: 'swap',
+  fallback: ['system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
 });
 
 export const metadata: Metadata = {

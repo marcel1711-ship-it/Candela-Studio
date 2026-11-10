@@ -79,6 +79,14 @@ cobra.
 devuelve el OAuth de Connect. El dinero va directo a la cuenta del comerciante y
 las disputas son suyas, no de Candela.
 
+**Las tipografías se auto-hospedan en `src/fonts/`.** No se usa
+`next/font/google`: esa API descarga las fuentes desde Google *durante el
+build*, así que una falla de red en ese momento tumba el deploy entero con un
+error que no dice nada (`Cannot read properties of null`). Pasó en el primer
+despliegue a Vercel. Con los `.woff2` en el repo el build no depende de nadie,
+el visitante hace una petición menos y ningún dato suyo viaja a Google. Son
+fuentes variables: tres archivos (128 KB) cubren todos los pesos.
+
 **Los productos se archivan, no se borran.** Borrar dejaría pedidos históricos
 sin referencia y falsearía los reportes de meses anteriores.
 
